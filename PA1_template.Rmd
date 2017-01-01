@@ -6,16 +6,31 @@ output:
 ---
 
 setwd("~/Dropbox (Personal)/coursera/RepData_PeerAssessment1")
+
 ## Loading and preprocessing the data
-library(data.table)
-activity <- read.table(unz("activity.zip", "activity.csv"),header=T, sep=",")
+To load the code and preprocess the data, run the following code block:
+```{r loading, echo=TRUE}
+    library(data.table)
+    activity <- read.table(unz("activity.zip", "activity.csv"),header=T, sep=",")
+    activity$date <- as.Date(activity$date, format="%Y-%m-%d")
+    summary(activity)
+```
 
 ## What is mean total number of steps taken per day?
+The mean total number of steps taken per day is (ignoring NAs):
+```{r mean, echo=TRUE}
+    steps_per_day <- tapply(activity$steps, activity$date, function(x) sum(x, na.rm=TRUE))
+    hist(steps_per_day, breaks=8)
 
-
+    mean(steps_per_day)
+    median(steps_per_day)
+```
 
 ## What is the average daily activity pattern?
-
+The average daily activity pattern is
+```{r pattern, echo=TRUE}
+    plot(steps ~ date, data=activity)
+```
 
 
 ## Imputing missing values
