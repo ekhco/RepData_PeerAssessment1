@@ -1,14 +1,14 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
+output:
   html_document:
     keep_md: true
 ---
 
-
+setwd("~/Dropbox (Personal)/coursera/RepData_PeerAssessment1")
 ## Loading and preprocessing the data
-
-
+library(data.table)
+activity <- read.table(unz("activity.zip", "activity.csv"),header=T, sep=",")
 
 ## What is mean total number of steps taken per day?
 
